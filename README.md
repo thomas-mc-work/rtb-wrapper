@@ -25,10 +25,10 @@ And here is how to __restore__:
 
 ## Setup
 
-    # prepare the script folder and the profile folder
-    mkdir -p "${HOME}/.rsync_tmbackup/conf.d"
+    # prepare the users bin folder and the profile folder
+    mkdir -p "${HOME}/bin" "${HOME}/.rsync_tmbackup/conf.d"
     # download the script
-    curl -o rtb-profile.sh "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
+    curl -o "${HOME}/bin/rtb-profile.sh "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
 
 ## Configuration
 
@@ -39,7 +39,6 @@ variable `CONFIG_DIR`.
 
 `$HOME/.rsync_tmbackup/config.inc`: It contains the default executables for the respective jobs
 
-    ---
     # the path to your rsync-tmbackup script, including custom parameters
     BASE_CMD_BACKUP="${HOME}/opt/rsync-tmbackup/rsync_tmbackup.sh"
     # the restore command including all desired parameters (e.g. --dry-run)
@@ -57,3 +56,13 @@ variable `CONFIG_DIR`.
     EXCLUDE_FILE="${HOME}/backup-documents-excludes.lst"
     # optional: wipe the source folder before restoring files? (true/false; default: false)
     WIPE_SOURCE_ON_RESTORE=true
+
+## Development
+
+### Testing
+
+There are some tests written with [bats](https://github.com/sstephenson/bats) to verify your changes:
+
+```bash
+./run-tests.sh
+```

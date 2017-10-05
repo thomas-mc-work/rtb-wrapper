@@ -58,9 +58,9 @@ if [ -r "$profile_file" ]; then
         cmd=$(fn_create_backup_cmd)
     fi
 
-    echo "# ${cmd}"
+    #echo "# ${cmd}"
     eval "$cmd"
 else
     echo "failed to read the profile file: ${profile_file}" > /dev/stderr
-    exit 2
+    exit 1
 fi
