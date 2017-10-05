@@ -5,7 +5,7 @@ set -o errexit   ## set -e : exit the script if any statement returns a non-true
 
 # Print CLI usage help
 fn_display_usage() {
-	echo "Usage: $(basename $0) <action> <profile>"
+	echo "Usage: $(basename \$0) <action> <profile>"
 	echo ""
 	echo "action: backup, restore"
 	echo "profile: name of the profile file"
@@ -17,12 +17,12 @@ fn_display_usage() {
 
 # create backup cli command
 fn_create_backup_cmd () {
-    cmd="${BASE_CMD_BACKUP} \"${SOURCE}\" \"${TARGET}\""
-    if [ ! -z ${EXCLUDE_FILE:-''} ]; then
+    cmd="${BASE_CMD_BACKUP} '${SOURCE}' '${TARGET}'"
+    if [ ! -z "${EXCLUDE_FILE:-''}" ]; then
         cmd="${cmd} \"${EXCLUDE_FILE}\""
     fi
     
-    echo $cmd
+    echo "$cmd"
 }
 
 # create restore cli command
@@ -33,9 +33,9 @@ fn_create_restore_cmd () {
         cmd="${cmd} --delete"
     fi
     
-    cmd="${cmd} \"${TARGET}/latest/\" \"${SOURCE}/\""
+    cmd="${cmd} '${TARGET}/latest/' '${SOURCE}/'"
     
-    echo $cmd
+    echo "$cmd"
 }
 
 action=${1?"param 1: action: backup, restore"}
@@ -43,13 +43,15 @@ profile=${2?"param 2: name of the profile"}
 
 # load config
 config_dir=${CONFIG_DIR:-"${HOME}/.rsync_tmbackup"}
-. $config_dir/config.inc
+# shellcheck source=test/config.inc
+. "${config_dir}/config.inc"
 
 # load profile
 profile_dir="${config_dir}/conf.d"
 profile_file="${profile_dir}/${profile}.inc"
 
 if [ -r "$profile_file" ]; then
+    # shellcheck source=test/testcase-1.inc
     . "$profile_file"
     # create cli command
     if [ "$action" = "restore" ]; then

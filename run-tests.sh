@@ -5,4 +5,4 @@ set -o nounset   ## set -u : exit the script if you try to use an uninitialised 
 set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
 
 docker build -t tmcw/rtb-wrapper-test -f test/Dockerfile .
-docker run -t --rm -v $(pwd)/test:/tests:ro tmcw/rtb-wrapper-test
+docker run -t --rm -v "$(pwd)/test:/tests:ro" tmcw/rtb-wrapper-test
