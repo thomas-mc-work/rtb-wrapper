@@ -11,6 +11,7 @@ addons:
     - shellcheck
 
 script:
+ - ./run-tests.sh
  - bash -c 'shopt -s globstar; shellcheck -x **/*.sh'
 
 matrix:
