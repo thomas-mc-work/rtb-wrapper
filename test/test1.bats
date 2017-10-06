@@ -2,6 +2,7 @@
 
 @test "create a backup with excludes" {
   run /opt/rtb-wrapper.sh backup testcase-1
+  echo "#${lines[11]}#"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" = "rsync_tmbackup: No previous backup - creating new one." ]
   [ "${lines[11]}" = "Number of files: 4 (reg: 2, dir: 2)" ]
