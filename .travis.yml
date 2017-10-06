@@ -10,9 +10,12 @@ addons:
     packages:
     - shellcheck
 
+services:
+  - docker
+
 script:
- - ./run-tests.sh
- - bash -c 'shopt -s globstar; shellcheck -x **/*.sh'
+  - ./run-tests.sh
+  - bash -c 'shopt -s globstar; shellcheck -x **/*.sh'
 
 matrix:
   fast_finish: true
