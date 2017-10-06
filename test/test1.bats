@@ -2,9 +2,6 @@
 
 @test "create a backup with excludes" {
   run /opt/rtb-wrapper.sh backup testcase-1
-  echo "#${lines[10]}#"
-  echo "#${lines[11]}#"
-  echo "#${lines[12]}#"
   [ "$status" -eq 0 ]
   [ "${lines[0]}" = "rsync_tmbackup: No previous backup - creating new one." ]
 #  [ "${lines[11]}" = "Number of files: 4 (reg: 2, dir: 2)" ]
@@ -16,6 +13,8 @@
   run stat /target/latest/file2.txt
   [ "$status" -eq 1 ]
 }
+
+  echo "----- ${lines[26]} ---" >&2
 
 @test "remove a file from the source and change another one" {
   echo "changed-1" > /source/file1.txt
