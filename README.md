@@ -1,4 +1,4 @@
-# rtb-wrapper: rsync-time-backup wrapper
+# rtb-wrapper: rsync-time-backup wrapper [![Build Status](https://travis-ci.org/thomas-mc-work/rtb-wrapper.svg?branch=master)](https://travis-ci.org/thomas-mc-work/rtb-wrapper)
 
 You know and love the well known __[rsync-time-backup](https://github.com/laurent22/rsync-time-backup)__ from
 [Laurent Cozic aka laurent22](https://github.com/laurent22)! Now what could be missing since this is a mature 
