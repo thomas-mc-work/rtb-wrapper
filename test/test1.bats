@@ -14,8 +14,6 @@
   [ "$status" -eq 1 ]
 }
 
-  echo "----- ${lines[26]} ---" >&2
-
 @test "remove a file from the source and change another one" {
   echo "changed-1" > /source/file1.txt
   rm -rf /source/folder-a
