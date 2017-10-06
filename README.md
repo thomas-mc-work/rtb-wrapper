@@ -1,8 +1,10 @@
-# rtb-wrapper: rsync-time-backup wrapper [![Build Status](https://travis-ci.org/thomas-mc-work/rtb-wrapper.svg?branch=master)](https://travis-ci.org/thomas-mc-work/rtb-wrapper)
+# rtb-wrapper - declarative rsync-time-backup [![Build Status](https://travis-ci.org/thomas-mc-work/rtb-wrapper.svg?branch=master)](https://travis-ci.org/thomas-mc-work/rtb-wrapper)
 
 You know and love the well known __[rsync-time-backup](https://github.com/laurent22/rsync-time-backup)__ from
 [Laurent Cozic aka laurent22](https://github.com/laurent22)! Now what could be missing since this is a mature 
 project? The whole thing based on separate profile files per backup case!
+
+__Example:__
 
 Consider this example __profile__ (named `user1-documents.inc`):
 
