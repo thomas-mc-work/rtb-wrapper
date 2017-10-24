@@ -18,7 +18,10 @@ fn_display_usage() {
 # create backup cli command
 fn_create_backup_cmd () {
     cmd="${BASE_CMD_BACKUP} '${SOURCE}' '${TARGET}'"
-    if [ ! -z "${EXCLUDE_FILE:-''}" ]; then
+
+    exclude_file_check=${EXCLUDE_FILE:-}
+    
+    if [ ! -z ${exclude_file_check} ]; then
         cmd="${cmd} \"${EXCLUDE_FILE}\""
     fi
     
@@ -49,13 +52,14 @@ config_dir=${CONFIG_DIR:-"${HOME}/.rsync_tmbackup"}
 # load profile
 profile_dir="${config_dir}/conf.d"
 profile_file="${profile_dir}/${profile}.inc"
-exclude_file="${profile_dir}/${profile}.excludes.lst"
+exclude_file_convention="${profile_dir}/${profile}.excludes.lst"
 
 if [ -r "$profile_file" ]; then
     # preset exclude file path before reading the profile
-    if [ -r "$exclude_file" ]; then
-        EXCLUDE_FILE="$exclude_file"
+    if [ -r "$exclude_file_convention" ]; then
+        EXCLUDE_FILE="$exclude_file_convention"
     fi
+
     # shellcheck source=test/testcase-1.inc
     . "$profile_file"
     # create cli command
@@ -65,8 +69,8 @@ if [ -r "$profile_file" ]; then
         cmd=$(fn_create_backup_cmd)
     fi
 
-    #echo "# ${cmd}"
-    eval "$cmd"
+    echo "# ${cmd}"
+    #eval "$cmd"
 else
     echo "failed to read the profile file: ${profile_file}" > /dev/stderr
     exit 1
