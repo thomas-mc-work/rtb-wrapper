@@ -60,7 +60,7 @@ if [ -r "$profile_file" ]; then
         EXCLUDE_FILE="$exclude_file_convention"
     fi
 
-    # shellcheck source=test/testcase-1.inc
+    # shellcheck disable=SC1091
     . "$profile_file"
     # create cli command
     if [ "$action" = "restore" ]; then
