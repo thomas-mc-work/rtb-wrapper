@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
-@test "create a backup with excludes" {
-  run /opt/rtb-wrapper.sh backup testcase-1
+@test "backup with excludes defined in profile" {
+  run /opt/rtb-wrapper.sh backup testcase-excludes-in-profile
   [ "$status" -eq 0 ]
   [ "${lines[0]}" = "rsync_tmbackup: No previous backup - creating new one." ]
 #  [ "${lines[11]}" = "Number of files: 4 (reg: 2, dir: 2)" ]

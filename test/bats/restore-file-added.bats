@@ -2,7 +2,7 @@
 
 setup () {
   # prepare backup
-  /opt/rtb-wrapper.sh backup testcase-1
+  /opt/rtb-wrapper.sh backup testcase-excludes-in-profile
 }
 
 @test "add a dirty file to the source and then restore with wipe" {
@@ -15,12 +15,13 @@ setup () {
 
   # prepare changed source
   echo "dirty" > "/source/dirty-file.txt"
-  
-  # actual test
+
+  # verify change  
   run stat /source/dirty-file.txt
   [ "$status" -eq 0 ]
-  
-  run /opt/rtb-wrapper.sh restore testcase-1
+
+  # actual test  
+  run /opt/rtb-wrapper.sh restore testcase-excludes-in-profile
   [ "$status" -eq 0 ]
 
   run stat /source/dirty-file.txt
