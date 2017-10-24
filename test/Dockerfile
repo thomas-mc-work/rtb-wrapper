@@ -21,6 +21,12 @@ RUN \
     https://github.com/laurent22/rsync-time-backup/raw/74f418d561b43243aa31e17426087befc066c870/rsync_tmbackup.sh \
   && chmod +x /opt/rsync_tmbackup.sh
 
+# prepare testcase
+RUN \
+  mkdir /target /source \
+  && touch "/target/backup.marker"
+COPY test/example-source /source
+
 # prepare application
 COPY rtb-wrapper.sh /opt/
 RUN chmod +x /opt/rtb-wrapper.sh
@@ -29,11 +35,5 @@ RUN chmod +x /opt/rtb-wrapper.sh
 COPY "test/config.inc" "/root/.rsync_tmbackup/"
 COPY "test/conf.d/*" "/root/.rsync_tmbackup/conf.d/"
 COPY "test/*.lst" /
-
-# prepare testcase
-RUN \
-  mkdir /target /source \
-  && touch "/target/backup.marker"
-COPY test/example-source /source
 
 CMD ["/usr/local/bin/bats", "/tests"]
