@@ -49,8 +49,13 @@ config_dir=${CONFIG_DIR:-"${HOME}/.rsync_tmbackup"}
 # load profile
 profile_dir="${config_dir}/conf.d"
 profile_file="${profile_dir}/${profile}.inc"
+exclude_file="${profile_dir}/${profile}.excludes.lst"
 
 if [ -r "$profile_file" ]; then
+    # preset exclude file path before reading the profile
+    if [ -r "$exclude_file" ]; then
+        EXCLUDE_FILE="$exclude_file"
+    fi
     # shellcheck source=test/testcase-1.inc
     . "$profile_file"
     # create cli command

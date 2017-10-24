@@ -7,7 +7,7 @@ set -o errexit   ## set -e : exit the script if any statement returns a non-true
 docker build -t tmcw/rtb-wrapper-test -f test/Dockerfile .
 
 # run every test in a clean container
-for test in test/*.bats; do
+for test in test/bats/*.bats; do
     echo
     # flat file mapping - no folder structure
     filename=$(basename "$test")

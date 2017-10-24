@@ -27,8 +27,8 @@ RUN chmod +x /opt/rtb-wrapper.sh
 
 # prepare configuration
 COPY "test/config.inc" "/root/.rsync_tmbackup/"
-COPY "test/testcase-1.inc" "/root/.rsync_tmbackup/conf.d/"
-COPY "test/excludes.lst" /
+COPY "test/conf.d/*" "/root/.rsync_tmbackup/conf.d/"
+COPY "test/*.lst" /
 
 # prepare testcase
 RUN \

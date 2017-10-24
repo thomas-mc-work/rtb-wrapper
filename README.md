@@ -16,7 +16,7 @@ Now it's as easy as this to __backup__ our data:
 
     rtb-wrapper.sh backup user1-documents 
 
-And here is how to __restore__:
+And here is how to __restore__ from the `latest` backup:
 
     rtb-wrapper.sh restore user1-documents
 
@@ -34,8 +34,7 @@ And here is how to __restore__:
 
 ## Configuration
 
-`rtb-wrapper` is using `$HOME/.rsync_tmbackup` as the base config folder, except it's overridden by the env 
-variable `CONFIG_DIR`.
+`rtb-wrapper` is using `$HOME/.rsync_tmbackup` as the base config folder, except it's overridden by the environment variable `CONFIG_DIR`.
 
 ### Basic config file
 
@@ -46,7 +45,7 @@ variable `CONFIG_DIR`.
     # the restore command including all desired parameters (e.g. --dry-run)
     BASE_CMD_RESTORE="rsync -aP"
 
-### Profile file(s)
+### Profile file
 
 `$HOME/.rsync_tmbackup/conf.d/*.inc`: The backup profiles, one per file
 
@@ -58,6 +57,15 @@ variable `CONFIG_DIR`.
     EXCLUDE_FILE="${HOME}/backup-documents-excludes.lst"
     # optional: wipe the source folder before restoring files? (true/false; default: false)
     WIPE_SOURCE_ON_RESTORE=true
+
+### Exclude file
+
+Alternatively you can define the exlcude file also by placing it next to the profile file. Following the convention:
+
+    ${HOME}/.rsync-tmbackup/conf.d/<profile-name>.inc
+    ${HOME}/.rsync-tmbackup/conf.d/<profile-name>.excludes.lst
+
+This exclude file definition will be overriden by the definition within the profile.
 
 ## Development
 
