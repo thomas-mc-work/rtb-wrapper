@@ -12,8 +12,7 @@ setup () {
 
 @test "remove a file from the source and change another one" {
   # verify not present
-  run stat /source/folder-a/file3.txt
-  [ "$status" -eq 1 ]
+  [ ! -r "/source/folder-a/file3.txt" ]
 
   run /opt/rtb-wrapper.sh restore testcase-excludes-in-profile
   [ "$status" -eq 0 ]
