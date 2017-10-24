@@ -29,8 +29,10 @@ And here is how to __restore__ from the `latest` backup:
 
     # prepare the users bin folder and the profile folder
     mkdir -p "${HOME}/bin" "${HOME}/.rsync_tmbackup/conf.d"
-    # download the script
-    curl -o "${HOME}/bin/rtb-profile.sh "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
+    # download the script into your profiles bin folder which is often in $PATH per default
+    curl -o "${HOME}/bin/rtb-profile.sh" "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
+    # mark the script executable
+    chmod +x "${HOME}/bin/rtb-profile.sh"
 
 ## Configuration
 
