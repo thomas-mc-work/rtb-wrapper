@@ -21,7 +21,7 @@ fn_create_backup_cmd () {
 
     exclude_file_check=${EXCLUDE_FILE:-}
     
-    if [ ! -z ${exclude_file_check} ]; then
+    if [ ! -z "${exclude_file_check}" ]; then
         cmd="${cmd} \"${EXCLUDE_FILE}\""
     fi
     
@@ -60,7 +60,7 @@ if [ -r "$profile_file" ]; then
         EXCLUDE_FILE="$exclude_file_convention"
     fi
 
-    # shellcheck disable=SC1091
+    # shellcheck disable=SC1090,SC1091
     . "$profile_file"
     # create cli command
     if [ "$action" = "restore" ]; then
