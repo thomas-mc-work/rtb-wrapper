@@ -17,9 +17,9 @@ RUN \
 # prepare rsync-tmbackup
 # release 74f418d561b43243aa31e17426087befc066c870 on 2017-09-26
 RUN \
-  curl -Lo /opt/rsync_tmbackup.sh \
+  curl -Lo /usr/local/bin/rsync_tmbackup.sh \
     https://github.com/laurent22/rsync-time-backup/raw/74f418d561b43243aa31e17426087befc066c870/rsync_tmbackup.sh \
-  && chmod +x /opt/rsync_tmbackup.sh
+  && chmod +x /usr/local/bin/rsync_tmbackup.sh
 
 # prepare testcase
 RUN \
@@ -32,7 +32,6 @@ COPY rtb-wrapper.sh /opt/
 RUN chmod +x /opt/rtb-wrapper.sh
 
 # prepare configuration
-COPY "test/config.inc" "/root/.rsync_tmbackup/"
 COPY "test/conf.d/*" "/root/.rsync_tmbackup/conf.d/"
 COPY "test/*.lst" /
 

@@ -17,7 +17,7 @@ fn_display_usage() {
 
 # create backup cli command
 fn_create_backup_cmd () {
-    cmd="${BASE_CMD_BACKUP} '${SOURCE}' '${TARGET}'"
+    cmd="rsync_tmbackup.sh '${SOURCE}' '${TARGET}'"
 
     exclude_file_check=${EXCLUDE_FILE:-}
     
@@ -30,7 +30,7 @@ fn_create_backup_cmd () {
 
 # create restore cli command
 fn_create_restore_cmd () {
-    cmd="${BASE_CMD_RESTORE}"
+    cmd="rsync -aP"
     
     if [ "${WIPE_SOURCE_ON_RESTORE:-'false'}" = "true" ]; then
         cmd="${cmd} --delete"
@@ -46,8 +46,6 @@ profile=${2?"param 2: name of the profile"}
 
 # load config
 config_dir=${CONFIG_DIR:-"${HOME}/.rsync_tmbackup"}
-# shellcheck source=test/config.inc
-. "${config_dir}/config.inc"
 
 # load profile
 profile_dir="${config_dir}/conf.d"

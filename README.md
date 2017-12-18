@@ -28,28 +28,19 @@ And here is how to __restore__ from the `latest` backup:
 ## Setup
 
     # prepare the users bin folder and the profile folder
-    mkdir -p "${HOME}/bin" "${HOME}/.rsync_tmbackup/conf.d"
+    mkdir -p "${HOME}/.rsync_tmbackup/conf.d"
     # download the script into your profiles bin folder which is often in $PATH per default
-    curl -o "${HOME}/bin/rtb-profile.sh" "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
+    curl -o "/usr/local/bin/rtb-profile.sh" "https://github.com/thomas-mc-work/rtb-profile/raw/master/rtb-profile.sh"
     # mark the script executable
-    chmod +x "${HOME}/bin/rtb-profile.sh"
+    chmod +x "/usr/local/bin/rtb-profile.sh"
 
 ## Configuration
 
 `rtb-wrapper` is using `$HOME/.rsync_tmbackup` as the base config folder, except it's overridden by the environment variable `CONFIG_DIR`.
 
-### Basic config file
-
-`$HOME/.rsync_tmbackup/config.inc`: It contains the default executables for the respective jobs
-
-    # the path to your rsync-tmbackup script, including custom parameters
-    BASE_CMD_BACKUP="${HOME}/opt/rsync-tmbackup/rsync_tmbackup.sh"
-    # the restore command including all desired parameters (e.g. --dry-run)
-    BASE_CMD_RESTORE="rsync -aP"
-
 ### Profile file
 
-`$HOME/.rsync_tmbackup/conf.d/*.inc`: The backup profiles, one per file
+`$HOME/.rsync_tmbackup/conf.d/<profile-name>.inc`: The backup profiles, one per file
 
     # the source folder
     SOURCE="${HOME}/Documents"
