@@ -4,8 +4,8 @@ set -o nounset   ## set -u : exit the script if you try to use an uninitialised 
 set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
 
 # Print CLI usage help
-fn_display_usage() {
-	echo "Usage: $(basename \$0) <action> <profile>"
+fn_display_usage () {
+	echo "Usage: $(basename $0) <action> <profile>"
 	echo ""
 	echo "action: backup, restore"
 	echo "profile: name of the profile file"
@@ -40,6 +40,13 @@ fn_create_restore_cmd () {
     
     echo "$cmd"
 }
+
+
+# show help when invoked without parameters
+if [ $# -eq 0 ]; then
+    fn_display_usage
+    exit 0
+fi
 
 action=${1?"param 1: action: backup, restore"}
 profile=${2?"param 2: name of the profile"}
