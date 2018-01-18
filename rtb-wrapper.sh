@@ -4,8 +4,8 @@ set -o nounset   ## set -u : exit the script if you try to use an uninitialised 
 set -o errexit   ## set -e : exit the script if any statement returns a non-true return value
 
 # Print CLI usage help
-fn_display_usage() {
-	echo "Usage: $(basename \$0) <action> <profile>"
+fn_display_usage () {
+	echo "Usage: $(basename $0) <action> <profile>"
 	echo ""
 	echo "action: backup, restore"
 	echo "profile: name of the profile file"
@@ -22,7 +22,7 @@ fn_create_backup_cmd () {
     exclude_file_check=${EXCLUDE_FILE:-}
     
     if [ ! -z "${exclude_file_check}" ]; then
-        cmd="${cmd} \"${EXCLUDE_FILE}\""
+        cmd="${cmd} '${EXCLUDE_FILE}'"
     fi
     
     echo "$cmd"
@@ -41,6 +41,20 @@ fn_create_restore_cmd () {
     echo "$cmd"
 }
 
+fn_abort_if_crlf () {
+    if ! awk '/\r$/ { exit(1) }' "$1"; then
+        echo " [!] The profile has at least one Windows-style line ending"
+        echo "     ERROR: failed to read the profile file: ${profile_file}" > /dev/stderr
+        exit 1
+    fi
+}
+
+# show help when invoked without parameters
+if [ $# -eq 0 ]; then
+    fn_display_usage
+    exit 0
+fi
+
 action=${1?"param 1: action: backup, restore"}
 profile=${2?"param 2: name of the profile"}
 
@@ -58,6 +72,8 @@ if [ -r "$profile_file" ]; then
         EXCLUDE_FILE="$exclude_file_convention"
     fi
 
+    # sanity check, crlf can break variable substitution
+    fn_abort_if_crlf "$profile_file"
     # shellcheck disable=SC1090,SC1091
     . "$profile_file"
     # create cli command
@@ -70,6 +86,6 @@ if [ -r "$profile_file" ]; then
     #echo "# ${cmd}"
     eval "$cmd"
 else
-    echo "failed to read the profile file: ${profile_file}" > /dev/stderr
+    echo "Failed to read the profile file: ${profile_file}" > /dev/stderr
     exit 1
 fi
