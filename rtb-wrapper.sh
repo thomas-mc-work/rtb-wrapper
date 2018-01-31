@@ -5,7 +5,7 @@ set -o errexit   ## set -e : exit the script if any statement returns a non-true
 
 # Print CLI usage help
 fn_display_usage () {
-	echo "Usage: $(basename $0) <action> <profile>"
+	echo "Usage: rtb-wrapper.sh <action> <profile>"
 	echo ""
 	echo "action: backup, restore"
 	echo "profile: name of the profile file"
